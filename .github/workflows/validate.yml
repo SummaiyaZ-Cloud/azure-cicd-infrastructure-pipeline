@@ -30,6 +30,13 @@ jobs:
 
       - name: Build Bicep template
         run: az bicep build --file infra/main.bicep
+                 - name: Run Checkov security scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: infra/
+          framework: bicep
+          quiet: true
+          compact: true  
 
       - name: Build DEV parameters
         run: >
