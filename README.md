@@ -185,6 +185,7 @@ The delivery process incorporates multiple controls:
 
 ## Deployment Result
 
+
 The CI/CD implementation successfully:
 
 - Validated infrastructure changes through pull requests.
