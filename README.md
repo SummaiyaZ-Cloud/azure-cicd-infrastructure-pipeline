@@ -92,7 +92,7 @@ The workflow:
 
 The GitHub `development` environment restricts deployments to the `main` branch.
 
-## Controlled Production Deployment
+# Controlled Production Deployment
 
 Production uses a separate manually triggered workflow.
 
@@ -101,13 +101,19 @@ Controls include:
 - GitHub `workflow_dispatch`
 - `main` branch deployment restriction
 - GitHub `production` environment
+- Pre-deployment Bicep validation
+- Azure What-If analysis before approval
 - Required reviewer approval
 - Dedicated production OIDC federated credential
 - Resource-group-scoped Azure RBAC
 
-The production workflow was tested through the approval gate and intentionally cancelled before infrastructure deployment.
+The production release flow follows:
 
-This verifies the release control without creating unnecessary production resources.
+**Manual trigger → Bicep validation → Azure What-If → Required reviewer approval → Production deployment**
+
+The production workflow successfully completed validation and What-If analysis before reaching the protected production approval gate. The workflow was intentionally cancelled at the approval stage, preventing production infrastructure from being deployed.
+
+This validates the production release controls without creating unnecessary production resources.
 
 ## Passwordless Azure Authentication
 
@@ -182,6 +188,10 @@ The delivery process incorporates multiple controls:
 ### Production Approval Gate
 
 ![Production approval gate](screenshots/06-production-approval-gate.png)
+
+### Production Validation Before Approval
+
+![PROD validation before approval](screenshots/07-prod-validation-before-approval.png)
 
 ## Deployment Result
 
